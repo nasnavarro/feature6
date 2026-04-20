@@ -34,3 +34,21 @@ menuToggle.addEventListener('change', () => {
   hamburgerLabel.setAttribute('aria-expanded', menuToggle.checked);
   mainNav.setAttribute('aria-hidden', !menuToggle.checked);
 });
+
+// Widget del tiempo
+import { getCurrentLocation, getCurrentWeather , createWeatherElement} from './utils/weather.js';
+getCurrentLocation().then(location => {
+  console.log('Ubicación obtenida:', location);
+  // Ya tenemos la ubicación, podemos llamar a la API del tiempo usando la ubicación obtenida
+  getCurrentWeather(location.lat, location.lon).then(weather => {
+    console.log('Tiempo actual:', weather);
+    // Generamos el elemento del widget del tiempo con la información obtenida
+    const weatherElement = createWeatherElement(weather);
+    // Lo añadimos al header, justo antes del contenedor de los iconos de modo oscuro
+    document.querySelector('.modeContainer').insertAdjacentElement('beforebegin', weatherElement);
+  });
+})
+.catch(error => {
+  console.error('Error al obtener la ubicación:', error);
+  // Aquí podrías mostrar un mensaje de error al usuario o usar una ubicación por defecto
+});

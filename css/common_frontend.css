@@ -96,6 +96,44 @@ body.dark-mode header{
   box-shadow: 0 2px 4px var(--color-shadow);
 }
 
+.weather-widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-right: 16px;
+  line-height: var(--line-height-tight);
+}
+
+.weather-widget p {
+  margin: 0;
+}
+
+.weather-widget img {
+  width: 32px;
+  height: 32px;
+}
+
+.weather-widget .temperature {
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+}
+
+.weather-widget .location {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+body.dark-mode .weather-widget .temperature {
+  color: var(--color-secondary);
+}
+
+body.dark-mode .weather-widget .location {
+  color: var(--color-text-muted);
+}
+
 /* Logo con efecto latido al cargar */
 @keyframes latido{
   0%{transform: scale(1);}
