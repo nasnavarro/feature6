@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Style Guide - Mi espacio personal</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content="Guía de estilos - Mi espacio personal" />
+    <meta name="author" content="Ignacio Navarro" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="https://res.cloudinary.com/dtcwtg73v/image/upload/v1773339950/favicon_bp62am.ico"
+    />
+    <link rel="stylesheet" href="./css/_reset.css">
+    <link rel="stylesheet" href="./css/stylesheet.css">
+  </head>
+  <body class="styleguide">
+    <header>
+      <h1>Guía de Estilos</h1>
+      <p>Mi espacio personal - Ignacio Navarro</p>
+    </header>
+
+    <main>
+      <section class="styleguide-section">
+        <h2>Paleta de Colores</h2>
+        <div class="color-palette">
+          <div class="color-swatch" style="background-color: var(--color-primary);">
+            <span class="color-code">#00434C</span>
+          </div>
+          <div class="color-swatch" style="background-color: var(--color-secondary);">
+            <span class="color-code">#B29F09</span>
+          </div>
+          <div class="color-swatch" style="background-color: var(--color-tertiary);">
+            <span class="color-code">#E85D3A</span>
+          </div>
+          <div class="color-swatch" style="background-color: var(--color-neutral-light);">
+            <span class="color-code">#F5F5F5</span>
+          </div>
+          <div class="color-swatch" style="background-color: var(--color-neutral-dark);">
+            <span class="color-code">#2C3E50</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="styleguide-section">
+        <h2>Variables de Color</h2>
+
+        <div class="variable-subsection">
+          <h3>Colores Principales</h3>
+          <div class="color-variables-grid">
+            <div class="color-variable-wrapper">
+              <span class="color-code">#00434C</span>
+              <div class="color-variable" style="background-color: var(--color-primary);"></div>
+              <span class="variable-name">--color-primary</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#B29F09</span>
+              <div class="color-variable" style="background-color: var(--color-secondary);"></div>
+              <span class="variable-name">--color-secondary</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#E85D3A</span>
+              <div class="color-variable" style="background-color: var(--color-tertiary);"></div>
+              <span class="variable-name">--color-tertiary</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#F5F5F5</span>
+              <div class="color-variable" style="background-color: var(--color-neutral-light);"></div>
+              <span class="variable-name">--color-neutral-light</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#2C3E50</span>
+              <div class="color-variable" style="background-color: var(--color-neutral-dark);"></div>
+              <span class="variable-name">--color-neutral-dark</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variable-subsection">
+          <h3>Colores de Header</h3>
+          <div class="color-variables-grid">
+            <div class="color-variable-wrapper">
+              <span class="color-code">#00434C</span>
+              <div class="color-variable" style="background-color: var(--color-header-primary);"></div>
+              <span class="variable-name">--color-header-primary</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#B29F09</span>
+              <div class="color-variable" style="background-color: var(--color-header-secondary);"></div>
+              <span class="variable-name">--color-header-secondary</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#E85D3A</span>
+              <div class="color-variable" style="background-color: var(--color-header-tertiary);"></div>
+              <span class="variable-name">--color-header-tertiary</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variable-subsection">
+          <h3>Colores Funcionales</h3>
+          <div class="color-variables-grid">
+            <div class="color-variable-wrapper">
+              <span class="color-code">#28A745</span>
+              <div class="color-variable" style="background-color: var(--color-success);"></div>
+              <span class="variable-name">--color-success</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#FFC107</span>
+              <div class="color-variable" style="background-color: var(--color-warning);"></div>
+              <span class="variable-name">--color-warning</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#DC3545</span>
+              <div class="color-variable" style="background-color: var(--color-error);"></div>
+              <span class="variable-name">--color-error</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#17A2B8</span>
+              <div class="color-variable" style="background-color: var(--color-info);"></div>
+              <span class="variable-name">--color-info</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variable-subsection">
+          <h3>Colores de Interfaz</h3>
+          <div class="color-variables-grid">
+            <div class="color-variable-wrapper">
+              <span class="color-code">#FFFFFF</span>
+              <div class="color-variable" style="background-color: var(--color-background);"></div>
+              <span class="variable-name">--color-background</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#F8F9FA</span>
+              <div class="color-variable" style="background-color: var(--color-surface);"></div>
+              <span class="variable-name">--color-surface</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">rgba(0,0,0,0.5)</span>
+              <div class="color-variable" style="background-color: var(--color-overlay);"></div>
+              <span class="variable-name">--color-overlay</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#DEE2E6</span>
+              <div class="color-variable" style="background-color: var(--color-border);"></div>
+              <span class="variable-name">--color-border</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">rgba(0,0,0,0.1)</span>
+              <div class="color-variable" style="background-color: var(--color-shadow);"></div>
+              <span class="variable-name">--color-shadow</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variable-subsection">
+          <h3>Colores de Texto</h3>
+          <div class="color-variables-grid">
+            <div class="color-variable-wrapper">
+              <span class="color-code">#212529</span>
+              <div class="color-variable" style="background-color: var(--color-text-primary);"></div>
+              <span class="variable-name">--color-text-primary</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#6C757D</span>
+              <div class="color-variable" style="background-color: var(--color-text-secondary);"></div>
+              <span class="variable-name">--color-text-secondary</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#ADB5BD</span>
+              <div class="color-variable" style="background-color: var(--color-text-muted);"></div>
+              <span class="variable-name">--color-text-muted</span>
+            </div>
+            <div class="color-variable-wrapper">
+              <span class="color-code">#FFFFFF</span>
+              <div class="color-variable" style="background-color: var(--color-text-inverse);"></div>
+              <span class="variable-name">--color-text-inverse</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="styleguide-section">
+        <h2>Tipografía</h2>
+
+        <div class="variable-subsection">
+          <h3>Familias de Fuente</h3>
+          <div class="typography-showcase">
+            <div class="typography-item">
+              <span class="variable-name">--font-family-primary</span>
+              <p style="font-family: var(--font-family-primary);">El rápido zorro marrón salta sobre el perro perezoso</p>
+              <span class="variable-value">'Roboto', system-ui, sans-serif</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variable-subsection">
+          <h3>Tamaños de Fuente</h3>
+          <div class="typography-scale">
+            <div class="scale-item">
+              <span class="variable-name">--font-size-xs</span>
+              <span style="font-size: var(--font-size-xs);">Texto de ejemplo (12px)</span>
+              <span class="variable-value">0.75rem</span>
+            </div>
+            <div class="scale-item">
+              <span class="variable-name">--font-size-sm</span>
+              <span style="font-size: var(--font-size-sm);">Texto de ejemplo (14px)</span>
+              <span class="variable-value">0.875rem</span>
+            </div>
+            <div class="scale-item">
+              <span class="variable-name">--font-size-base</span>
+              <span style="font-size: var(--font-size-base);">Texto de ejemplo (16px)</span>
+              <span class="variable-value">1rem</span>
+            </div>
+            <div class="scale-item">
+              <span class="variable-name">--font-size-lg</span>
+              <span style="font-size: var(--font-size-lg);">Texto de ejemplo (18px)</span>
+              <span class="variable-value">1.125rem</span>
+            </div>
+            <div class="scale-item">
+              <span class="variable-name">--font-size-xl</span>
+              <span style="font-size: var(--font-size-xl);">Texto de ejemplo (20px)</span>
+              <span class="variable-value">1.25rem</span>
+            </div>
+            <div class="scale-item">
+              <span class="variable-name">--font-size-2xl</span>
+              <span style="font-size: var(--font-size-2xl);">Texto de ejemplo (24px)</span>
+              <span class="variable-value">1.5rem</span>
+            </div>
+            <div class="scale-item">
+              <span class="variable-name">--font-size-3xl</span>
+              <span style="font-size: var(--font-size-3xl);">Texto de ejemplo (30px)</span>
+              <span class="variable-value">1.875rem</span>
+            </div>
+            <div class="scale-item">
+              <span class="variable-name">--font-size-4xl</span>
+              <span style="font-size: var(--font-size-4xl);">Texto de ejemplo (36px)</span>
+              <span class="variable-value">2.25rem</span>
+            </div>
+            <div class="scale-item">
+              <span class="variable-name">--font-size-5xl</span>
+              <span style="font-size: var(--font-size-5xl);">Texto de ejemplo (48px)</span>
+              <span class="variable-value">3rem</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variable-subsection">
+          <h3>Pesos de Fuente</h3>
+          <div class="typography-weights">
+            <div class="weight-item">
+              <span class="variable-name">--font-weight-light</span>
+              <span style="font-weight: var(--font-weight-light);">Texto Light (300)</span>
+              <span class="variable-value">300</span>
+            </div>
+            <div class="weight-item">
+              <span class="variable-name">--font-weight-normal</span>
+              <span style="font-weight: var(--font-weight-normal);">Texto Normal (400)</span>
+              <span class="variable-value">400</span>
+            </div>
+            <div class="weight-item">
+              <span class="variable-name">--font-weight-medium</span>
+              <span style="font-weight: var(--font-weight-medium);">Texto Medium (500)</span>
+              <span class="variable-value">500</span>
+            </div>
+            <div class="weight-item">
+              <span class="variable-name">--font-weight-semibold</span>
+              <span style="font-weight: var(--font-weight-semibold);">Texto Semibold (600)</span>
+              <span class="variable-value">600</span>
+            </div>
+            <div class="weight-item">
+              <span class="variable-name">--font-weight-bold</span>
+              <span style="font-weight: var(--font-weight-bold);">Texto Bold (700)</span>
+              <span class="variable-value">700</span>
+            </div>
+            <div class="weight-item">
+              <span class="variable-name">--font-weight-black</span>
+              <span style="font-weight: var(--font-weight-black);">Texto Black (900)</span>
+              <span class="variable-value">900</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="variable-subsection">
+          <h3>Alturas de Línea</h3>
+          <div class="typography-line-heights">
+            <div class="line-height-item">
+              <span class="variable-name">--line-height-tight</span>
+              <p style="line-height: var(--line-height-tight);">Este es un texto de ejemplo con altura de línea ajustada para mostrar la diferencia entre los valores de line-height. Permite comparar visualmente cómo afecta la legibilidad y el espaciado vertical.</p>
+              <span class="variable-value">1.25</span>
+            </div>
+            <div class="line-height-item">
+              <span class="variable-name">--line-height-normal</span>
+              <p style="line-height: var(--line-height-normal);">Este es un texto de ejemplo con altura de línea normal para mostrar la diferencia entre los valores de line-height. Permite comparar visualmente cómo afecta la legibilidad y el espaciado vertical.</p>
+              <span class="variable-value">1.5</span>
+            </div>
+            <div class="line-height-item">
+              <span class="variable-name">--line-height-relaxed</span>
+              <p style="line-height: var(--line-height-relaxed);">Este es un texto de ejemplo con altura de línea relajada para mostrar la diferencia entre los valores de line-height. Permite comparar visualmente cómo afecta la legibilidad y el espaciado vertical.</p>
+              <span class="variable-value">1.75</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 Ignacio Navarro</p>
+    </footer>
+  </body>
+</html>

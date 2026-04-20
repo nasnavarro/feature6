@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Ignacio Navarro" />
+    <meta name="description" content="Cheatsheet de CSS"/>
+    <link rel="icon" type="image/x-icon" href="./img/common/favicon.ico"/>
+    <title>Cheatsheet de CSS</title>
+    <link rel="stylesheet" href="./css/cheatsheets.css">
+  </head>
+  <body data-page="cheatsheet-css">
+
+    <!-- Aquí irá el HEADER, que se cargará en main.js mediante módulos-->
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="submenu-sticky">
+            <div class="cheatsheet-intro">
+                <h1>Cheatsheet - CSS</h1>
+                <p class="section-intro">Guía para escribir CSS3 moderno de un modo profesional: selectores, texto, fuentes, box model, flexbox, grid, transiciones, animaciones, media queries, etc...</p>
+            </div>
+            <nav>
+                <ul class="submenu">
+                  <li><a href="#conceptosflexbox">Conceptos Flexbox</a></li>
+                  <li><a href="#contenedorflex">Contenedor Flex</a></li>
+                  <li><a href="#elementosflex">Elementos Flex</a></li>
+                  <li><a href="#boxmodel">Modelo de Caja</a></li>
+                  <li><a href="#posicionamiento">Posicionamiento</a></li>
+                  <li><a href="#selectoresyespecificidad">Selectores y Especificidad</a></li>
+                  <li><a href="#animacionesytransiciones">Animaciones y Transiciones</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <section class="cheatsheet-content">
+          <article class="cheat-card" id="conceptosflexbox">
+            <h2>Conceptos Flexbox: Ejes y Terminología</h2>
+            <p>Flexbox es un modelo de diseño unidimensional que distribuye el espacio basándose en dos ejes: el <strong>eje principal (main axis)</strong> y el <strong>eje transversal (cross axis)</strong>. La dirección del eje principal no es fija; depende de la propiedad <code>flex-direction</code>. El eje perpendicular al principal se conoce automáticamente como eje transversal.</p>
+            <pre><code>
+          /* Concepto de ejes */
+          .container {
+            display: flex; /* Activa el contexto flex */
+            flex-direction: row; /* Eje principal horizontal */
+            /* Eje transversal es vertical */
+          }
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><strong>Main Start / Main End:</strong> Puntos donde inicia y termina el flujo de los elementos.</li>
+              <li><strong>Cross Axis:</strong> Dirección perpendicular al flujo principal.</li>
+              <li>Flexbox es ideal para componentes y diseños a pequeña escala; para layouts grandes se recomienda Grid.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="contenedorflex">
+            <h2>Contenedor Flex: Propiedades del Padre</h2>
+            <p>Estas propiedades se aplican al elemento contenedor para controlar el comportamiento global de sus hijos. Permiten definir la dirección, si el contenido debe saltar a una nueva línea y cómo se distribuye el espacio sobrante.</p>
+            <pre><code>
+          .flex-container {
+            display: flex;
+            flex-direction: row; /* row | column | row-reverse | column-reverse */
+            flex-wrap: wrap; /* permite que los ítems salten de línea */
+            justify-content: space-between; /* Alineación en eje principal */
+            align-items: center; /* Alineación en eje transversal (una línea) */
+            align-content: stretch; /* Alineación de líneas (solo con wrap) */
+            gap: 15px; /* Espacio entre elementos */
+          }
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><strong>justify-content:</strong> Controla el eje principal.</li>
+              <li><strong>align-items:</strong> Alinea ítems dentro de su línea actual en el eje transversal.</li>
+              <li><strong>align-content:</strong> Solo funciona si existe <code>flex-wrap: wrap</code> y hay múltiples líneas de contenido.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="elementosflex">
+            <h2>Elementos Flex: Propiedades de los Hijos</h2>
+            <p>Los elementos hijos (flex items) pueden alterar su tamaño inicial para llenar el espacio disponible o encogerse para evitar desbordamientos. También pueden romper la alineación general del padre de forma individual.</p>
+            <pre><code>
+          .flex-item {
+            flex-grow: 1; /* Proporción de crecimiento */
+            flex-shrink: 0; /* Evita que el elemento se encoja */
+            flex-basis: 200px; /* Tamaño inicial antes de distribuir espacio */
+            align-self: flex-end; /* Sobrescribe align-items del padre */
+            order: 2; /* Cambia el orden visual */
+          }
+
+          /* Recomendado: Shorthand */
+          .flex-item-pro {
+            flex: 1 1 200px; /* grow | shrink | basis */
+          }
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li>Usa siempre el shorthand <code>flex</code> en lugar de las propiedades individuales para que los valores se ajusten inteligentemente.</li>
+              <li><code>order</code> cambia la posición visual, pero no el orden real en el HTML (cuidado con la accesibilidad).</li>
+              <li><code>flex-shrink: 0</code> es vital para mantener el tamaño original de un elemento si el contenedor es pequeño.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="boxmodel">
+            <h2>Modelo de Caja (Box Model)</h2>
+            <p>Cada elemento HTML se considera una caja rectangular. El modelo de caja define cómo se calcula el espacio total de un elemento sumando sus partes: contenido, relleno interno, borde y margen externo.</p>
+            <pre><code>
+          .card {
+            box-sizing: border-box; /* Muy recomendado */
+            width: 300px;
+            padding: 16px; /* Espacio por dentro */
+            border: 1px solid #ddd; /* El límite de la caja */
+            margin: 20px; /* Espacio por fuera */
+          }
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><strong>content:</strong> El texto o imágenes reales.</li>
+              <li><strong>padding:</strong> Crea "aire" entre el contenido y el borde.</li>
+              <li><strong>margin:</strong> Separa la caja de otros elementos.</li>
+              <li><strong>box-sizing: border-box:</strong> Asegura que el padding y el border no aumenten el ancho total definido para el elemento.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="posicionamiento">
+            <h2>Posicionamiento: Static, Relative, Absolute, Fixed y Sticky</h2>
+            <p>La propiedad <code>position</code> determina cómo se ubica un elemento en el documento. Permite sacarlo del flujo normal o fijarlo en una posición específica de la pantalla.</p>
+            <pre><code>
+          .parent { position: relative; } /* Referencia para hijos */
+
+          .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+          }
+
+          .navbar {
+            position: sticky;
+            top: 0;
+          }
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><strong>relative:</strong> Mantiene el espacio original pero permite mover el elemento o servir de referencia.</li>
+              <li><strong>absolute:</strong> Se posiciona respecto al ancestro más cercano con posición relativa.</li>
+              <li><strong>fixed:</strong> Se queda pegado a la pantalla sin importar el scroll.</li>
+              <li><strong>sticky:</strong> Se comporta como relativo hasta que alcanza un punto de scroll definido, donde se queda "pegado".</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="selectoresyespecificidad">
+            <h2>Selectores y Especificidad</h2>
+            <p>Los selectores indican a qué elementos HTML aplicar estilos. La especificidad es la jerarquía que decide qué regla gana cuando hay conflictos. Cuanto más específico sea el selector, más "fuerza" tendrá.</p>
+            <pre><code>
+          /* Jerarquía de fuerza (de menos a más) */
+          p { color: red; } /* Por etiqueta (1) */
+          .clase { color: blue; } /* Por clase (10) */
+          #id { color: green; } /* Por ID (100) - Muy fuerte */
+
+          /* Ejemplo combinado */
+          #header .nav a:hover { color: orange; }
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li>Evita usar IDs para estilos; las clases son más reutilizables y fáciles de mantener.</li>
+              <li>El modificador <code>!important</code> rompe la cascada y debe evitarse en favor de una mejor especificidad.</li>
+              <li>Las pseudo-clases como <code>:hover</code> o <code>:disabled</code> seleccionan elementos basados en su estado actual.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="animacionesytransiciones">
+            <h2>Animaciones y Transiciones</h2>
+            <p>Las transiciones permiten cambios suaves de un estado a otro en un tiempo determinado. Las animaciones con <code>@keyframes</code> permiten crear secuencias complejas de varios pasos sin necesidad de JavaScript.</p>
+            <pre><code>
+          /* Transición simple */
+          .btn {
+            transition: transform 0.3s ease, background 0.2s;
+          }
+          .btn:hover { transform: scale(1.1); }
+
+          /* Animación compleja */
+          @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+
+          .modal {
+            animation: slideIn 0.5s ease both;
+          }
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li>Usa <code>transition</code> para interacciones rápidas (hover, focus).</li>
+              <li>Usa <code>animation-fill-mode: both</code> para que el elemento mantenga el estado final de la animación.</li>
+              <li>Es mejor animar <code>transform</code> y <code>opacity</code> que propiedades de geometría (top, width) para mejorar el rendimiento (GPU).</li>
+            </ul>
+          </article>
+        </section>
+    </main>
+
+    <!-- Aquí irá el FOOTER, que se cargará en main.js mediante módulos-->
+
+  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/cheatsheetSubmenu.js"></script>
+  </body>
+</html>

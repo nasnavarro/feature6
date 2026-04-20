@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Ignacio Navarro" />
+    <meta name="description" content="Cheatsheet de HTML"/>
+    <link rel="icon" type="image/x-icon" href="./img/common/favicon.ico"/>
+    <title>Cheatsheet de HTML</title>
+    <link rel="stylesheet" href="./css/cheatsheets.css">
+  </head>
+  <body data-page="cheatsheet-html">
+
+    <!-- Aquí irá el HEADER, que se cargará en main.js mediante módulos-->
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="submenu-sticky">
+            <div class="cheatsheet-intro">
+                <h1>Cheatsheet - HTML</h1>
+                <p class="section-intro">Guía para escribir HTML5 moderno de un modo semántico: estructura, texto, enlaces, formularios, listas, etc ... de un modo accesible y que sigan buenas prácticas de maquetación y diseño.</p>
+            </div>
+            <nav>
+                <ul class="submenu">
+                  <li><a href="#estructurabase">Estructura Base</a></li>
+                  <li><a href="#semantica">Semántica y Layout</a></li>
+                  <li><a href="#textoenlacesyrutas">Texto y Enlaces</a></li>
+                  <li><a href="#listas">Listas</a></li>
+                  <li><a href="#formularios">Formularios</a></li>
+                  <li><a href="#multimedia">Multimedia</a></li>
+                  <li><a href="#atributosclave">Atributos Clave</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <section class="cheatsheet-content">
+          <article class="cheat-card" id="estructurabase">
+            <h2>Estructura base (plantilla mínima)</h2>
+            <p>Define el esqueleto fundamental de un documento HTML5.</p>
+            <pre>
+              <code>
+                &lt;!doctype html&gt;
+                &lt;html lang="es"&gt;
+                &lt;head&gt;
+                  &lt;meta charset="utf-8" /&gt;
+                  &lt;title&gt;Mi p&aacute;gina&lt;/title&gt;
+                &lt;/head&gt;
+                &lt;body&gt;
+                  &lt;h1&gt;Hola HTML&lt;/h1&gt;
+                &lt;/body&gt;
+                &lt;/html&gt;
+              </code>
+            </pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><code>&lt;!doctype html&gt;</code> siempre arriba.</li>
+              <li><code>lang</code>, <code>meta charset</code> y <code>viewport</code> casi siempre.</li>
+              <li>Títulos: 1 solo <code>h1</code> principal por página (buena práctica).</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="semantica">
+            <h2>Semántica (layout típico)</h2>
+            <p>Etiquetas que describen la estructura y el significado del contenido.</p>
+            <pre>
+              <code>
+                &lt;header&gt;
+                  &lt;nav&gt;
+                    &lt;a href="/"&gt;Home&lt;/a&gt;
+                  &lt;/nav&gt;
+                &lt;/header&gt;
+                &lt;main&gt;
+                  &lt;article&gt;
+                    &lt;h2&gt;T&iacute;tulo del post&lt;/h2&gt;
+                  &lt;/article&gt;
+                &lt;/main&gt;
+              </code>
+            </pre>
+            <p><strong>Cuándo usar:</strong></p>
+            <ul>
+              <li><code>header/footer</code>: cabecera/pie de página o de una sección.</li>
+              <li><code>nav</code>: bloque de navegación.</li>
+              <li><code>main</code>: contenido principal (1 por página).</li>
+              <li><code>section</code>: agrupación temática.</li>
+              <li><code>article</code>: pieza independiente reutilizable.</li>
+              <li><code>aside</code>: contenido secundario (relacionado).</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="textoenlacesyrutas">
+            <h2>Texto, enlaces y rutas</h2>
+            <p>Organización de contenido textual e hipervínculos.</p>
+            <pre>
+              <code>
+                &lt;h1&gt;T&iacute;tulo principal&lt;/h1&gt;
+                &lt;p&gt;Texto con &lt;strong&gt;importancia&lt;/strong&gt;.&lt;/p&gt;
+                &lt;a href="https://ejemplo.com" target="_blank" rel="noopener noreferrer"&gt;
+                  Enlace externo
+                &lt;/a&gt;
+              </code>
+            </pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><code>strong</code> = importancia, <code>em</code> = énfasis (no solo "negrita" y "cursiva").</li>
+              <li>En enlaces con <code>target="_blank"</code> usa <code>rel="noopener noreferrer"</code>.</li>
+              <li><code>alt</code> en imágenes: describe el contenido o función.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="listas">
+            <h2>Listas</h2>
+            <p>Agrupación de elementos con o sin un orden específico.</p>
+            <pre>
+              <code>
+                &lt;ul&gt;
+                  &lt;li&gt;Elemento no ordenado&lt;/li&gt;
+                &lt;/ul&gt;
+                &lt;ol&gt;
+                  &lt;li&gt;Paso 1&lt;/li&gt;
+                  &lt;li&gt;Paso 2&lt;/li&gt;
+                &lt;/ol&gt;
+              </code>
+            </pre>
+            <p><strong>Cuándo usar:</strong></p>
+            <ul>
+              <li><code>ul</code>: lista sin orden.</li>
+              <li><code>ol</code>: pasos / ranking / orden.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="formularios">
+            <h2>Formularios (lo esencial)</h2>
+            <p>Interacción y recolección de datos del usuario.</p>
+            <pre>
+              <code>
+                &lt;form action="/enviar" method="post"&gt;
+                  &lt;label for="name"&gt;Nombre&lt;/label&gt;
+                  &lt;input id="name" name="name" type="text" required /&gt;
+                  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+                &lt;/form&gt;
+              </code>
+            </pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><code>label</code> + <code>for</code> debe apuntar al <code>id</code> del campo.</li>
+              <li>Atributos útiles: <code>required</code>, <code>min</code>, <code>max</code>, <code>minlength</code>, <code>maxlength</code>, <code>pattern</code>.</li>
+              <li><code>name</code> es clave: es lo que "viaja" al backend.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="multimedia">
+            <h2>Multimedia (audio, vídeo e iframe)</h2>
+            <p>Soporte nativo para reproducción y contenido externo.</p>
+            <pre>
+              <code>
+                &lt;audio controls src="audio/pista.mp3"&gt;&lt;/audio&gt;
+                &lt;video controls width="480" src="video/demo.mp4"&gt;&lt;/video&gt;
+                &lt;iframe src="https://www.youtube.com/embed/ID" title="Video"&gt;&lt;/iframe&gt;
+              </code>
+            </pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><code>figure/figcaption</code> para contenido con pie.</li>
+              <li><code>controls</code> para permitir play/pausa.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="atributosclave">
+            <h2>Atributos clave (id, class, data-*)</h2>
+            <p>Propiedades para identificación, estilos y datos personalizados.</p>
+            <pre>
+              <code>
+                &lt;section id="pricing" class="section--pricing"&gt;
+                  &lt;button class="btn" data-plan="pro" aria-label="Elegir plan Pro"&gt;
+                    Elegir
+                &lt;/button&gt;
+                &lt;/section&gt;
+              </code>
+            </pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><code>id</code>: único en la página (anclas, JS, accesibilidad).</li>
+              <li><code>class</code>: reutilizable (CSS/JS).</li>
+              <li><code>data-*</code>: datos personalizados para JS.</li>
+              <li><code>aria-label</code>: ayuda a lectores de pantalla cuando el texto no es suficiente.</li>
+            </ul>
+          </article>
+        </section>
+    </main>
+
+    <!-- Aquí irá el FOOTER, que se cargará en main.js mediante módulos-->
+
+  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/cheatsheetSubmenu.js"></script>
+  </body>
+</html>

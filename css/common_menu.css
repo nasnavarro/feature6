@@ -1,0 +1,270 @@
+/* Menú de navegación - Desktop por defecto */
+nav {
+  display: flex;
+  gap: 25px;
+  transition: all 0.3s ease;
+  padding-top: 10px; /*Compensar en alineación vertical el padding-bottom de "nav a" que sólo es visible en hover.*/
+}
+
+nav a {
+  display: inline-block;
+  text-decoration: none;
+  color: var(--color-text-primary);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: relative;
+  transition: all 0.5s ease;
+  padding-bottom: 10px;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-primary);
+  transition: width 0.5s ease;
+}
+
+nav a:hover {
+  color: var(--color-primary);
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+nav .nav-active {
+  display: inline-block;
+  color: var(--color-primary);
+  font-family: var(--font-family-display);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  position: relative;
+  padding-bottom: 10px;
+  cursor: default;
+}
+
+nav .nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-primary);
+}
+
+/* Dark mode - Desktop nav */
+body.dark-mode nav a,
+body.dark-mode nav a:hover,
+body.dark-mode nav .nav-active {
+  color: var(--color-secondary);
+}
+
+body.dark-mode nav a {
+  color: var(--color-text-inverse);
+}
+
+body.dark-mode nav a::after,
+body.dark-mode nav .nav-active::after {
+  background-color: var(--color-secondary);
+}
+
+/* Menú Hamburguesa - Oculto por defecto */
+.menu-toggle {
+  display: none;
+}
+
+body.dark-mode .hamburger span,
+body.dark-mode .hamburger span::before,
+body.dark-mode .hamburger span::after {
+  background-color: white;
+}
+
+/* Mobile y Tablet - Menú vertical */
+@media (max-width: 768px) {
+
+  header {
+    justify-content: flex-start;
+  }
+
+  .modeContainer {
+    order: 2;
+    margin-left: auto;
+    margin-right: 50px;
+    padding: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: -4px;
+  }
+
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 1rem;
+    position: relative;
+    order: 3;
+    z-index: var(--z-index-menu-hamburger);
+  }
+
+  .hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    position: relative;
+    transition: none;
+  }
+
+  .hamburger span::before,
+  .hamburger span::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-primary);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .hamburger span::before {
+    top: -8px;
+  }
+
+  .hamburger span::after {
+    top: 8px;
+  }
+
+  .hamburger:hover span::before {
+    top: -10px;
+  }
+
+  .hamburger:hover span::after {
+    top: 10px;
+  }
+
+  nav {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    background-color: rgba(var(--color-primary-rgb), 0.9);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 5rem 2rem 2rem;
+    gap: 0rem;
+    transform: translateX(100%);
+    z-index: var(--z-index-menu-nav);
+    overflow-y: auto;
+  }
+
+  nav a {
+    color: var(--color-text-inverse);
+    font-size: var(--font-size-lg);
+    padding: 1rem;
+    text-align: center;
+  }
+
+  nav a:hover {
+    color: var(--color-text-muted);
+  }
+
+  nav .nav-active {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-lg);
+    padding: 1rem;
+    text-align: center;
+  }
+
+  nav .nav-active::after {
+    background-color: var(--color-text-muted);
+  }
+
+  nav a::after {
+    background-color: var(--color-text-muted);
+    transition: width 0.5s ease;
+  }
+
+  .menu-toggle:checked ~ nav {
+    display: flex;
+    transform: translateX(0);
+  }
+
+  .menu-toggle:checked ~ .hamburger span {
+    background-color: white;
+    visibility: hidden;
+  }
+
+  .menu-toggle:checked ~ .hamburger span::before {
+    top: 0;
+    transform: rotate(45deg);
+    background-color: white;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .menu-toggle:checked ~ .hamburger span::after {
+    top: 0;
+    transform: rotate(-45deg);
+    background-color: white;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/*Modo claro / oscuro: Jugamos con el estilo "dark-mode" en el body*/
+.modeContainer {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.sun-icon, .moon-icon {
+  width: 24px;
+  height: 24px;
+  transition: color 0.4s ease, transform 0.4s ease;
+}
+
+.sun-icon {
+  color: var(--color-primary);
+}
+
+.sun-icon:hover {
+  color: black;
+  transform: rotate(30deg) scale(1.15);
+}
+
+.moon-icon:hover {
+  transform: scale(1.15);
+}
+
+.moon-icon{
+  display:none;
+  color: white;
+}
+
+.moon-icon:hover{
+  color: gainsboro;
+}
+
+body.dark-mode .sun-icon{
+  display:none;
+}
+
+body.dark-mode .moon-icon{
+  display:block;
+}

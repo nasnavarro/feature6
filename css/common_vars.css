@@ -1,0 +1,88 @@
+/* Reseteo de css */
+@import url('./common_reset.css');
+
+/* Importaciones de fuentes externas */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+/********************/
+/* VARIABLES DE CSS */
+/********************/
+:root {
+  /* Paleta de colores en base a #00343C de Valdecantos. */
+  --color-primary: #00434C;        /* Verde azulado oscuro - principal */
+  --color-primary-rgb: 0, 67, 76;  /* Verde azulado oscuro - principal */
+  --color-primary-light: #CCE8EB;  /* Verde azulado muy claro - fondos */
+  --color-primary-dark: #002830;   /* Verde azulado muy oscuro - texto */
+  --color-secondary: #B29F09;      /* Amarillo mostaza - secundario */
+  --color-secondary-light: #F5EFBA; /* Amarillo mostaza muy claro - fondos */
+  --color-secondary-dark: #7A6B06;  /* Amarillo mostaza muy oscuro - texto */
+  --color-tertiary: #E85D3A;       /* Naranja terracota - terciario */
+  --color-tertiary-light: #FBDDD6; /* Naranja terracota muy claro - fondos */
+  --color-tertiary-dark: #A03420;  /* Naranja terracota muy oscuro - texto */
+  --color-neutral-light: #F5F5F5;  /* Gris muy claro - fondos */
+  --color-neutral-dark: #2C3E50;   /* Gris azulado oscuro - texto */
+
+  /* Colores de header */
+  --color-header-primary: var(--color-primary);    /* Header principal */
+  --color-header-secondary: var(--color-secondary); /* Header secundario */
+  --color-header-tertiary: var(--color-tertiary);   /* Header terciario */
+
+  /* Colores funcionales - Estados */
+  --color-success: #28A745;        /* Verde - éxito/confirmación */
+  --color-warning: #FFC107;        /* Amarillo - advertencia/precaución */
+  --color-error: #DC3545;          /* Rojo - error/eliminación */
+  --color-info: #17A2B8;           /* Azul claro - información/notificación */
+
+  /* Colores de interfaz - UI */
+  --color-background: white;       /* Fondo principal */
+  --color-background-dark: #121212; /* Fondo principal en modo oscuro */
+  --color-surface: #F8F9FA;        /* Fondo secundario/tarjetas */
+  --color-overlay: rgba(0, 0, 0, 0.5); /* Overlay para modales */
+  --color-border: #DEE2E6;         /* Bordes y divisores */
+  --color-shadow: rgba(0, 0, 0, 0.1); /* Sombras */
+
+  /* Colores de texto */
+  --color-text-primary: #212529;   /* Texto principal */
+  --color-text-secondary: #6C757D; /* Texto secundario */
+  --color-text-muted: #ADB5BD;     /* Texto deshabilitado/muted */
+  --color-text-inverse: #FFFFFF;   /* Texto sobre fondos oscuros */
+
+  /* Tipografía - Sistema de escalas tipográficas */
+  --font-family-primary: 'Roboto', system-ui, sans-serif;
+  --font-family-display: 'Inter', system-ui, sans-serif;
+
+  /* Tamaños de fuente - Escala modular (1.250 = Major Third) */
+  --font-size-xs: 0.75rem;        /* 12px */
+  --font-size-sm: 0.875rem;       /* 14px */
+  --font-size-base: 1rem;         /* 16px - Base */
+  --font-size-lg: 1.125rem;        /* 18px */
+  --font-size-xl: 1.25rem;         /* 20px */
+  --font-size-2xl: 1.5rem;        /* 24px */
+  --font-size-3xl: 1.875rem;      /* 30px */
+  --font-size-4xl: 2.25rem;      /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+
+  /* Pesos de fuente */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-black: 900;
+
+  /* Alturas de línea */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Layout */
+  --header-height: 80px;
+  --footer-height: 60px;
+  --main-top: calc(var(--header-height) + 10px);
+  --max-width-global: 1940px;
+
+  /* Posicionamientos con z-indez */
+  --z-index-header: 1000;
+  --z-index-menu-nav: 900;
+  --z-index-menu-hamburger: 1100;
+}

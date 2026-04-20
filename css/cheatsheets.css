@@ -1,0 +1,256 @@
+@import url('./common_frontend.css');
+
+/* Offset para anchors: header fijo + altura del sticky submenu  para que no salga el texto cortado*/
+:root {
+    --submenu-sticky-height: 160px;
+}
+
+.cheatsheet-content article[id] {
+    scroll-margin-top: calc(var(--header-height) + var(--submenu-sticky-height));
+}
+
+/* Sticky wrapper */
+.submenu-sticky {
+    position: sticky;
+    top: var(--header-height);
+    z-index: calc(var(--z-index-header) - 1);
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-primary);
+    transition: box-shadow 0.3s ease;
+    text-align: center;
+    padding: 1rem 1.5rem 0;
+    margin-bottom:25px;
+}
+
+.submenu-sticky.scrolled {
+    box-shadow: 0 4px 12px var(--color-shadow);
+}
+
+/* Intro compacta dentro del sticky */
+.submenu-sticky .cheatsheet-intro h1 {
+    font-size: var(--font-size-3xl);
+    width: auto;
+    display: inline-block;
+    padding-bottom: 0;
+    border-bottom: none;
+    margin-bottom: 0.25rem;
+}
+
+.submenu-sticky .cheatsheet-intro p.section-intro {
+    font-size: var(--font-size-sm);
+    margin-bottom: 0.5rem;
+}
+
+/* Reset de estilos globales de nav dentro del sticky + línea separadora */
+.submenu-sticky nav {
+    display: block;
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+    max-width: none;
+    background-color: transparent;
+    padding: 0;
+    gap: 0;
+    overflow: visible;
+    border-top: 1px solid var(--color-primary);
+    margin: 0 -1.5rem;
+}
+
+@media (max-width: 768px) {
+    .submenu-sticky nav {
+        display: none;
+    }
+}
+
+/* Pills del submenu */
+ul.submenu {
+    list-style: none;
+    margin: 0;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    justify-content: center;
+}
+
+ul.submenu li a {
+    display: inline-block;
+    text-decoration: none;
+    font-family: var(--font-family-display);
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    padding: 0.4rem 1.1rem;
+    border-radius: 999px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Anula el ::after animado del nav global */
+ul.submenu li a::after {
+    display: none;
+}
+
+ul.submenu li a:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+}
+
+ul.submenu li a.submenu-active {
+    background-color: var(--color-primary);
+    color: var(--color-text-inverse);
+}
+
+/* Dark mode */
+body.dark-mode .submenu-sticky {
+    background-color: var(--color-background-dark);
+    border-bottom-color: var(--color-secondary);
+}
+
+body.dark-mode .submenu-sticky nav {
+    border-top-color: var(--color-secondary);
+}
+
+body.dark-mode ul.submenu li a {
+    color: var(--color-text-muted);
+}
+
+body.dark-mode ul.submenu li a:hover {
+    background-color: #2A2A2A;
+    color: var(--color-secondary-light);
+}
+
+body.dark-mode ul.submenu li a.submenu-active {
+    background-color: var(--color-secondary);
+    color: var(--color-primary-dark);
+}
+
+/* =====================
+   CHEAT CARDS
+   ===================== */
+
+/* Grid del contenedor */
+.cheatsheet-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Card */
+.cheat-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-primary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+
+.cheat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+/* Título de la card */
+.cheat-card h2 {
+    font-size: var(--font-size-lg);
+    color: var(--color-primary);
+    width: 100%;
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--color-primary-light);
+}
+
+/* Descripción introductoria */
+.cheat-card > p:first-of-type {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* Etiqueta "Reglas rápidas:" / "Cuándo usar:" */
+.cheat-card p strong {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+}
+
+/* Bloque de código - estilo editor oscuro */
+.cheat-card pre {
+    background-color: #0d1117;
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    margin: 0 0 1rem 0;
+}
+
+.cheat-card pre code {
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: var(--font-size-sm);
+    color: #e2e8f0;
+    line-height: 1.65;
+    background: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Código inline */
+.cheat-card :not(pre) > code {
+    font-family: 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    font-size: var(--font-size-xs);
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+}
+
+/* Lista de reglas */
+.cheat-card ul {
+    padding-left: 1.25rem;
+    margin: 0;
+}
+
+.cheat-card ul li {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-primary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: 0.3rem;
+}
+
+/* Dark mode */
+body.dark-mode .cheat-card {
+    background-color: #161b22;
+    border-color: #30363d;
+    border-left-color: var(--color-secondary);
+}
+
+body.dark-mode .cheat-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .cheat-card h2 {
+    color: var(--color-secondary);
+    border-bottom-color: #30363d;
+}
+
+body.dark-mode .cheat-card pre {
+    border: 1px solid #30363d;
+}
+
+body.dark-mode .cheat-card :not(pre) > code {
+    background-color: #2a2a2a;
+    color: var(--color-secondary-light);
+}
+
+body.dark-mode .cheat-card ul li {
+    color: var(--color-text-inverse);
+}
+
+body.dark-mode .cheat-card p strong {
+    color: var(--color-secondary);
+}

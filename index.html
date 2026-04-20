@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Ignacio Navarro" />
+    <meta name="description" content="Home de mi espacio personal: Ignacio Navarro"/>
+    <link rel="icon" type="image/x-icon" href="./img/common/favicon.ico"/>
+    <title>Home de mi espacio personal: Ignacio Navarro</title>
+    <link rel="stylesheet" href="./css/index.css">
+  </head>
+  <body data-page="index">
+
+    <!-- Aquí irá el HEADER, que se cargará en main.js mediante módulos-->
+
+    <!-- Imagen de portada. Colocada de modo excepcional fuera del main para no complicar margins y paddings. -->
+    <section class="home-image">
+      <picture>
+        <source media="(min-width: 1024px)" srcset="./img/home/v_portada_1940x540.jpg">
+        <source media="(min-width: 768px)" srcset="./img/home/v_portada_1100x280.jpg">
+        <source media="(min-width: 600px)" srcset="./img/home/v_portada_768x175.jpg">
+        <img src="./img/home/v_portada_600x275.jpg" alt="Imagen del Espacio Valdecantos">
+      </picture>
+      <div class="img-portada-tit">ESPACIO VALDECANTOS</div>
+    </section>
+
+    <!-- Contenido principal -->
+    <main>
+      <section id="about">
+        <h1>Ignacio Navarro Valdecantos</h1>
+        <h2 class="color-tertiary">Desarrollador Web & Viajero</h2>
+        <p>Desarrollador web con más de 25 años de experiencia, desde los primeros portales HTML de revistas o publicaciones como Woman o Mundo Deportivo, hasta plataformas financieras y marketplaces con millones de productos. Apasionado de la tecnología desde los tiempos del Spectrum 48K, he participado en la creación de varias empresas tecnológicas, además de haber trabajado en desarrollo para el sector de la banca, y otros sectores, como la cementera CEMEX. Actualmente interesado y en formación de tecnologías con Inteligencia Artificial aprovechando el profundo conocimiento de las bases técnicas y la experiencia para guiar y verificar la validez de los resultados.</p>
+        <p>Fuera del código, me mueven el deporte, la cocina y los viajes, especialmente por el Sureste asiático.</p>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <p>Estas son las tecnologías y herramientas que manejo.</p>
+        <div id="skills-dominada-container" class="skills-container"></div>
+        <div id="skills-others-container" class="skills-container"></div>
+          <!-- Aquí se cargarán las skills dinámicamente desde JS -->
+        </div>
+      </section>
+
+      <section id="cheatsheets">
+        <h2>Cheatsheets</h2>
+        <p>Guías rápidas de referencia para las tecnologías más utilizadas en desarrollo web, con ejemplos de código y explicaciones claras.</p>
+        <div id="cheatsheets-container" class="cheatsheets-container">
+          <!-- Aquí se cargarán las cheatsheets dinámicamente desde JS -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Aquí irá el FOOTER, que se cargará en main.js mediante módulos-->
+
+  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/utils/skillsList.js"></script>
+  <script type="module" src="./js/utils/cheatsheetsList.js"></script>
+  </body>
+</html>

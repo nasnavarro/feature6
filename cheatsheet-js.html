@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="author" content="Ignacio Navarro" />
+    <meta name="description" content="Cheatsheet de JS"/>
+    <link rel="icon" type="image/x-icon" href="./img/common/favicon.ico"/>
+    <title>Cheatsheet de JS</title>
+    <link rel="stylesheet" href="./css/cheatsheets.css">
+  </head>
+  <body data-page="cheatsheet-js">
+
+    <!-- Aquí irá el HEADER, que se cargará en main.js mediante módulos-->
+
+    <!-- Contenido principal -->
+    <main>
+        <div class="submenu-sticky">
+            <div class="cheatsheet-intro">
+                <h1>Cheatsheet - JS</h1>
+                <p class="section-intro">Guía para escribir Javascript moderno de un modo profesional: tipos, variables, template strings, operadores, funciones, array functions, módulos, DOM, etc...</p>
+            </div>
+            <nav>
+                <ul class="submenu">
+                  <li><a href="#domseleccion">DOM: Selección y Nodos</a></li>
+                  <li><a href="#dommanipulacion">DOM: Manipulación y CSS</a></li>
+                  <li><a href="#domeventos">DOM: Eventos y Delegación</a></li>
+                  <li><a href="#destructuring">Destructuring</a></li>
+                  <li><a href="#spreadrest">Spread y Rest Operator</a></li>
+                  <li><a href="#buclesavanzados">Bucles Avanzados (for...of/in)</a></li>
+                  <li><a href="#localstorage">LocalStorage y JSON</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <section class="cheatsheet-content">
+          <article class="cheat-card" id="domseleccion">
+            <h2>DOM: Selección y Nodos</h2>
+            <p>El DOM (Document Object Model) permite a JavaScript acceder y manipular la estructura del documento. Podemos seleccionar elementos únicos o listas de nodos, y movernos a través de su jerarquía.</p>
+            <pre><code>
+          // Selección
+          const card = document.querySelector(".card");
+          const items = document.querySelectorAll("li"); // Devuelve NodeList
+
+          // Navegación entre nodos
+          const padre = el.parentElement;
+          const hijos = el.children;
+          const siguiente = el.nextElementSibling;
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li>Usa <code>querySelector</code> como estándar para flexibilidad total.</li>
+              <li><code>querySelectorAll</code> devuelve una NodeList que puedes recorrer con <code>forEach</code>.</li>
+              <li>Diferencia entre <code>children</code> (solo elementos HTML) y <code>childNodes</code> (incluye texto y comentarios).</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="dommanipulacion">
+            <h2>DOM: Manipulación y CSS</h2>
+            <p>Permite crear nuevos elementos desde cero, cambiar su contenido de texto o HTML, y gestionar sus estilos mediante clases de CSS de forma eficiente.</p>
+            <pre><code>
+          // Crear e insertar
+          const li = document.createElement("li");
+          li.textContent = "Nuevo Item";
+          document.querySelector("ul").append(li);
+
+          // Gestión de clases (Recomendado)
+          el.classList.add("active");
+          el.classList.toggle("hidden");
+
+          // Eliminar
+          el.remove();
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li>Prefiere <code>textContent</code> sobre <code>innerHTML</code> por seguridad (evita XSS).</li>
+              <li>Usa <code>classList</code> en lugar de <code>style.prop</code> para mantener la separación de conceptos (estilos en CSS, lógica en JS).</li>
+              <li><code>append()</code> permite añadir varios elementos o texto a la vez, a diferencia de <code>appendChild()</code>.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="domeventos">
+            <h2>DOM: Eventos y Delegación</h2>
+            <p>Los eventos detectan la interacción del usuario. La delegación de eventos permite manejar múltiples elementos hijos escuchando únicamente al padre, lo cual es vital para listas dinámicas.</p>
+            <pre><code>
+          // Evento básico
+          btn.addEventListener("click", (e) => {
+            console.log("Click en:", e.target);
+          });
+
+          // Delegación de eventos
+          ul.addEventListener("click", (e) => {
+            if (e.target.matches("button.remove")) {
+              e.target.closest("li").remove();
+            }
+          });
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li>Usa <code>e.preventDefault()</code> en formularios para evitar que la página se recargue al enviar.</li>
+              <li><code>e.target</code> es el elemento real donde se hizo click; <code>e.currentTarget</code> es el elemento que tiene el listener.</li>
+              <li>La delegación ahorra memoria al no crear cientos de listeners individuales.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="destructuring">
+            <h2>Destructuring (Objetos y Arrays)</h2>
+            <p>Sintaxis que permite extraer valores de objetos o elementos de arrays y asignarlos a variables de forma directa y limpia.</p>
+            <pre><code>
+          // Objetos
+          const user = { id: 1, name: "Ana", role: "admin" };
+          const { name, role: userRole, city = "Madrid" } = user;
+
+          // Arrays
+          const colors = ["red", "blue", "green"];
+          const [first, second] = colors;
+          const [,, third] = colors; // Salta posiciones
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li>Puedes renombrar variables usando <code>clave: nuevoNombre</code>.</li>
+              <li>Puedes asignar valores por defecto si la propiedad no existe.</li>
+              <li>Es muy útil en los parámetros de las funciones: <code>const fn = ({ name }) => ...</code>.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="spreadrest">
+            <h2>Spread y Rest Operator (...)</h2>
+            <p>El operador de tres puntos sirve para expandir elementos (Spread) o para agruparlos (Rest), facilitando la inmutabilidad de los datos.</p>
+            <pre><code>
+          // Spread: Copiar y extender
+          const original = [1, 2];
+          const copia = [...original, 3]; // [1-3]
+
+          const user = { name: "Data" };
+          const updated = { ...user, role: "admin" };
+
+          // Rest: Capturar el resto
+          const { role, ...publicData } = updated;
+          const [first, ...others] = [4-6];
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li>Spread crea una **copia superficial** (shallow copy); cuidado con objetos anidados.</li>
+              <li>Úsalo para fusionar objetos sin mutar los originales.</li>
+              <li>Rest siempre debe ser el último elemento en una desestructuración o lista de parámetros.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="buclesavanzados">
+            <h2>Bucles Avanzados: for...of / for...in</h2>
+            <p>JavaScript ofrece formas específicas para iterar sobre valores de colecciones o sobre las propiedades de un objeto.</p>
+            <pre><code>
+          // for...of: Para valores (Arrays, NodeLists)
+          for (const item of ["a", "b"]) {
+            console.log(item);
+          }
+
+          // for...in: Para claves (Objetos)
+          const user = { name: "Ana", age: 25 };
+          for (const key in user) {
+            console.log(key, user[key]);
+          }
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><strong>for...of</strong> es para elementos iterables (lo que "hay dentro").</li>
+              <li><strong>for...in</strong> es para propiedades de objetos (las "etiquetas").</li>
+              <li>Para objetos, a menudo es mejor usar <code>Object.entries(obj).forEach(([key, value]) => ...)</code>.</li>
+            </ul>
+          </article>
+
+          <article class="cheat-card" id="localstorage">
+            <h2>LocalStorage y JSON</h2>
+            <p>Permite guardar datos en el navegador que persisten incluso tras cerrar la pestaña. Como solo guarda strings, necesitamos JSON para manejar objetos y arrays.</p>
+            <pre><code>
+          // Guardar objeto
+          const tasks = [{ id: 1, text: "Aprender JS" }];
+          localStorage.setItem("myTasks", JSON.stringify(tasks));
+
+          // Leer objeto
+          const raw = localStorage.getItem("myTasks");
+          const myTasks = raw ? JSON.parse(raw) : [];
+
+          // Borrar
+          localStorage.removeItem("myTasks");
+          localStorage.clear(); // Borra todo
+            </code></pre>
+            <p><strong>Reglas rápidas:</strong></p>
+            <ul>
+              <li><code>JSON.stringify</code> convierte datos a texto para guardar.</li>
+              <li><code>JSON.parse</code> convierte el texto recuperado de vuelta a su tipo original.</li>
+              <li>El límite de almacenamiento suele ser de unos 5MB por dominio.</li>
+            </ul>
+          </article>
+        </section>
+
+    </main>
+
+    <!-- Aquí irá el FOOTER, que se cargará en main.js mediante módulos-->
+
+  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./js/cheatsheetSubmenu.js"></script>
+  </body>
+</html>

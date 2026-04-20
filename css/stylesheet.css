@@ -1,0 +1,362 @@
+/* Importar estilos principales del proyecto */
+@import url('./styles.css');
+
+/************************/
+/* ESTILOS ESPECÍFICOS STYLEGUIDE */
+/************************/
+body.styleguide {
+  margin: 0 auto;
+  padding: 0;
+  background-color: var(--color-neutral-light);
+  color: var(--color-neutral-dark);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.styleguide main {
+  flex: 1;
+}
+
+.styleguide header {
+  text-align: center;
+  margin-bottom: 1rem;
+  background-color: white;
+  padding: 1.5rem;
+  border-radius: var(--border-radius, 0.5rem);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.styleguide header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0 0 1rem 0;
+}
+
+.styleguide header p {
+  font-size: 1.1rem;
+  color: var(--color-neutral-dark);
+  margin: 0;
+}
+
+.styleguide-section {
+  margin-bottom: 1.5rem;
+  background-color: white;
+  padding: 1rem 1.5rem;
+  border-radius: var(--border-radius, 0.5rem);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.styleguide-section h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--color-secondary);
+  padding-bottom: 0.5rem;
+}
+
+/************************/
+/* PALETA DE COLORES */
+/************************/
+.color-palette {
+  display: flex;
+  gap: 0;
+  margin: 1rem 0;
+  overflow: hidden;
+}
+
+.styleguide .color-swatch {
+  flex: 1;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  min-height: 200px;
+}
+
+/************************/
+/* VARIABLES DE COLOR */
+/************************/
+.color-variables-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.color-variable-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.color-variable {
+  width: 100%;
+  height: 175px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.color-variable-wrapper .color-code {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-neutral-dark);
+  padding: 4px 8px;
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border-radius: 2px;
+  text-align: center;
+}
+
+.variable-name {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 4px 8px;
+  font-family: 'Courier New', monospace;
+  font-weight: 400;
+  font-size: 0.8rem;
+  border-radius: 2px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.variable-subsection {
+  margin-bottom: 2rem;
+}
+
+.variable-subsection h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--color-header-tertiary);
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+.color-code {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-neutral-dark);
+  padding: 0.5rem 1rem;
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.styleguide footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: white;
+  border-radius: var(--border-radius, 0.5rem);
+  margin-top: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/************************/
+/* TIPOGRAFÍA */
+/************************/
+.typography-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 1rem 0;
+}
+
+.typography-item {
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-surface);
+}
+
+.typography-item .variable-name {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-sm);
+  color: white;
+  margin-bottom: 0.5rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.typography-item p {
+  margin: 0 0 0.5rem 0;
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+}
+
+.typography-item .variable-value {
+  display: block;
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-xs);
+  color: white;
+  background-color: var(--color-border);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+.typography-scale {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.scale-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  gap: 0.5rem;
+}
+
+.scale-item .variable-name {
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-sm);
+  color: white;
+  font-weight: var(--font-weight-semibold);
+}
+
+.scale-item span:not(.variable-name) {
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+}
+
+.scale-item .variable-value {
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-xs);
+  color: white;
+  background-color: var(--color-border);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+.typography-weights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.typography-line-heights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.weight-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  gap: 0.5rem;
+}
+
+.line-height-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-surface);
+  gap: 0.5rem;
+}
+
+.weight-item .variable-name,
+.line-height-item .variable-name {
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-sm);
+  color: white;
+  font-weight: var(--font-weight-semibold);
+}
+
+.weight-item span:not(.variable-name),
+.line-height-item p {
+  color: var(--color-text-primary);
+  line-height: var(--line-height-normal);
+}
+
+.line-height-item p {
+  margin: 0;
+  font-size: var(--font-size-base);
+}
+
+.weight-item .variable-value,
+.line-height-item .variable-value {
+  font-family: 'Courier New', monospace;
+  font-size: var(--font-size-xs);
+  color: white;
+  background-color: var(--color-border);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  align-self: flex-start;
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  body.styleguide {
+    padding: 0;
+  }
+
+  .color-palette {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .styleguide .color-swatch {
+    height: 80px;
+    min-height: 80px;
+  }
+
+  .color-variables-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .color-variable {
+    width: 100%;
+    height: 140px;
+  }
+
+  .color-variable-wrapper .color-code {
+    font-size: 0.8rem;
+    padding: 3px 6px;
+  }
+
+  .variable-name {
+    font-size: 0.7rem;
+    padding: 3px 6px;
+  }
+
+  .typography-showcase,
+  .typography-scale,
+  .typography-weights,
+  .typography-line-heights {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .styleguide header h1 {
+    font-size: 2rem;
+  }
+
+  .styleguide-section h2 {
+    font-size: 1.5rem;
+  }
+}

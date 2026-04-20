@@ -1,0 +1,209 @@
+@import url('./common_frontend.css');
+
+/* La imagen de intro de la home la quiero a ancho completo hasta un ancho del max-width definido.
+** Se queda fuera del main para que no afecte al resto de estilos.
+*/
+
+.home-image {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-width-global);
+  margin: 0 auto;
+  height: auto;
+  margin-top: var(--header-height);
+}
+
+.img-portada-tit {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-shadow: #00434C 0.1em 0.1em 0.2em;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  padding-bottom: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .img-portada-tit {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 480px) {
+  .img-portada-tit {
+    text-align: right;
+    padding-right:10px;
+  }
+}
+
+/* Contenido principal con margen superior ajustado */
+main {
+  margin-top: 20px;
+}
+
+section{
+  margin:20px 0 30px 0;
+}
+
+/*Estilos de las tarjetas de skills*/
+.skills-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+.skills-container>h3{
+  display:inline-block;
+  grid-column: 1 / -1;
+  margin-bottom:0px;
+}
+.skill-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.skill-card img {
+  width: 40px;
+  height: 40px;
+}
+
+.skill-card h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.skill-card p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  flex: 1;
+}
+
+.skill-card .tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: auto;
+}
+
+.skill-card .tags .tag {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary-dark);
+  background-color: var(--color-primary-light);
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+}
+
+/* Tarjetas de cheatsheets */
+.cheatsheets-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.cheatsheet-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cheatsheet-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--color-shadow);
+}
+
+.cheatsheet-card-icon img {
+  width: 40px;
+  height: 40px;
+}
+
+.cheatsheet-card-body {
+  flex: 1;
+}
+
+.cheatsheet-card-body h3 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin: 0 0 0.25rem 0;
+}
+
+.cheatsheet-card-body p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.cheatsheet-card-arrow {
+  font-size: var(--font-size-xl);
+  color: var(--color-primary);
+  transition: transform 0.2s ease;
+}
+
+.cheatsheet-card:hover .cheatsheet-card-arrow {
+  transform: translateX(4px);
+}
+
+/* Dark mode - Tarjetas de cheatsheets */
+body.dark-mode .cheatsheet-card {
+  background-color: #1E1E1E;
+  border-color: #333;
+}
+
+body.dark-mode .cheatsheet-card-body h3 {
+  color: var(--color-secondary);
+}
+
+body.dark-mode .cheatsheet-card-body p {
+  color: var(--color-text-muted);
+}
+
+body.dark-mode .cheatsheet-card-arrow {
+  color: var(--color-secondary);
+}
+
+/* Dark mode - Tarjetas de skills */
+body.dark-mode .skill-card {
+  background-color: #1E1E1E;
+  border-color: #333;
+}
+
+body.dark-mode .skill-card h3 {
+  color: var(--color-secondary);
+}
+
+body.dark-mode .skill-card p {
+  color: var(--color-text-muted);
+}
+
+body.dark-mode .skill-card .tags .tag {
+  background-color: #2A2A2A;
+  color: var(--color-secondary-light);
+}
