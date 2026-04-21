@@ -69,20 +69,96 @@ async function fetchOpenMeteo(lat, lon) {
   };
 }
 
-// async function fetchOpenWeatherMap(lat, lon) { ... }  ← siguiente API aquí
+async function fetchWeatherAPI(lat, lon) {
+  const WEATHER_API_KEY = '89762f57084d4ca89dd164642261704';
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${WEATHER_API_KEY}&q=${lat},${lon}&days=3&lang=es`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`WeatherAPI HTTP ${res.status}`);
+  const data = await res.json();
+
+  return {
+    current: {
+      temp:        Math.round(data.current.temp_c),
+      feelsLike:   Math.round(data.current.feelslike_c),
+      humidity:    data.current.humidity,
+      windSpeed:   Math.round(data.current.wind_kph),
+      cloudCover:  data.current.cloud,
+      icon:        'https:' + data.current.condition.icon,
+      description: data.current.condition.text,
+    },
+    forecast: data.forecast.forecastday.map(day => ({
+      label: dayLabel(day.date),
+      icon:  'https:' + day.day.condition.icon,
+      max:   Math.round(day.day.maxtemp_c),
+      min:   Math.round(day.day.mintemp_c),
+    })),
+  };
+}
+
+async function fetchOpenWeatherMap(lat, lon) {
+  const OWM_KEY = '7864e76394a1805f90799cf0b442a3fe';
+  const base = `https://api.openweathermap.org/data/2.5`;
+  const params = `lat=${lat}&lon=${lon}&appid=${OWM_KEY}&units=metric&lang=es`;
+
+  const [currentRes, forecastRes] = await Promise.all([
+    fetch(`${base}/weather?${params}`),
+    fetch(`${base}/forecast?${params}`),
+  ]);
+  if (!currentRes.ok) throw new Error(`OWM current HTTP ${currentRes.status}`);
+  if (!forecastRes.ok) throw new Error(`OWM forecast HTTP ${forecastRes.status}`);
+
+  const cur  = await currentRes.json();
+  const fore = await forecastRes.json();
+
+  // Agrupa intervalos de 3h por día y toma el de mediodía como representativo
+  const byDay = {};
+  fore.list.forEach(item => {
+    const date = item.dt_txt.split(' ')[0];
+    if (!byDay[date]) byDay[date] = { temps: [], rep: null };
+    byDay[date].temps.push(item.main.temp);
+    if (item.dt_txt.includes('12:00:00') || !byDay[date].rep) byDay[date].rep = item;
+  });
+
+  const owmIcon = (code) => `https://openweathermap.org/img/wn/${code}@2x.png`;
+
+  return {
+    current: {
+      temp:        Math.round(cur.main.temp),
+      feelsLike:   Math.round(cur.main.feels_like),
+      humidity:    cur.main.humidity,
+      windSpeed:   Math.round(cur.wind.speed * 3.6),  // m/s → km/h
+      cloudCover:  cur.clouds.all,
+      icon:        owmIcon(cur.weather[0].icon),
+      description: cur.weather[0].description,
+    },
+    forecast: Object.entries(byDay).slice(0, 5).map(([date, data]) => ({
+      label: dayLabel(date),
+      icon:  owmIcon(data.rep.weather[0].icon),
+      max:   Math.round(Math.max(...data.temps)),
+      min:   Math.round(Math.min(...data.temps)),
+    })),
+  };
+}
 
 const APIS = [
-  { id: 'open-meteo', name: 'Open-Meteo', fetch: fetchOpenMeteo },
-  // { id: 'openweathermap', name: 'OpenWeatherMap', fetch: fetchOpenWeatherMap },
+  { id: 'open-meteo',      name: 'Open-Meteo',      fetch: fetchOpenMeteo      },
+  { id: 'weather-api',     name: 'WeatherAPI',       fetch: fetchWeatherAPI     },
+  { id: 'openweathermap',  name: 'OpenWeatherMap',   fetch: fetchOpenWeatherMap },
 ];
 
 // ─── Render ───────────────────────────────────────────────────────────────────
+
+// WeatherAPI devuelve URLs de imagen; Open-Meteo devuelve emojis.
+const iconHtml = (icon, cls) =>
+  icon.startsWith('http')
+    ? `<img src="${icon}" alt="" class="${cls}-img">`
+    : `<span class="${cls}">${icon}</span>`;
 
 function renderCurrent({ temp, feelsLike, humidity, windSpeed, cloudCover, icon, description }) {
   return `
     <div class="wc-current">
       <div class="wc-main">
-        <span class="wc-icon">${icon}</span>
+        ${iconHtml(icon, 'wc-icon')}
         <span class="wc-temp">${temp}°C</span>
         <span class="wc-desc">${description}</span>
       </div>
@@ -101,7 +177,7 @@ function renderForecast(forecast) {
       ${forecast.map(day => `
         <div class="wc-forecast-day">
           <span class="wc-forecast-label">${day.label}</span>
-          <span class="wc-forecast-icon">${day.icon}</span>
+          ${iconHtml(day.icon, 'wc-forecast-icon')}
           <span class="wc-forecast-max">${day.max}°</span>
           <span class="wc-forecast-min">${day.min}°</span>
         </div>`).join('')}
