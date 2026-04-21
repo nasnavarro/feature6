@@ -6,5 +6,6 @@ export const menuItems = [
     { pagecode: 'viajes',   label: 'Viajes',    href: '#viajes' , active: false},
     { pagecode: 'escritos', label: 'Escritos',  href: '#escritos' , active: false},
     { pagecode: 'recursos', label: 'Recursos',  href: 'recursos.html' , active: true},
+    { pagecode: 'el-tiempo', label: 'El Tiempo', href: 'el-tiempo.html', active: true},
     { pagecode: 'contacto', label: 'Contacto',  href: 'contacto.html' , active: true},
 ];

@@ -1,0 +1,196 @@
+import { locations } from '../data/locations.js';
+
+// ─── WMO helpers (códigos estándar meteorológicos) ────────────────────────────
+
+const WMO_ICONS = {
+  0: '☀️',  1: '🌤️', 2: '⛅',  3: '☁️',
+  45: '🌫️', 48: '🌫️',
+  51: '🌦️', 53: '🌦️', 55: '🌧️',
+  61: '🌧️', 63: '🌧️', 65: '🌧️',
+  71: '🌨️', 73: '❄️',  75: '❄️',  77: '❄️',
+  80: '🌦️', 81: '🌧️', 82: '🌧️',
+  85: '🌨️', 86: '❄️',
+  95: '⛈️', 96: '⛈️', 99: '⛈️',
+};
+
+const WMO_DESCS = {
+  0: 'Despejado',            1: 'Mayormente despejado', 2: 'Parcialmente nublado', 3: 'Nublado',
+  45: 'Niebla',              48: 'Niebla con escarcha',
+  51: 'Llovizna ligera',     53: 'Llovizna moderada',   55: 'Llovizna intensa',
+  61: 'Lluvia ligera',       63: 'Lluvia moderada',     65: 'Lluvia intensa',
+  71: 'Nevada ligera',       73: 'Nevada moderada',     75: 'Nevada intensa',     77: 'Granizo',
+  80: 'Chubascos ligeros',   81: 'Chubascos moderados', 82: 'Chubascos fuertes',
+  85: 'Nieve con chubascos', 86: 'Nieve intensa',
+  95: 'Tormenta',            96: 'Tormenta con granizo', 99: 'Tormenta con granizo fuerte',
+};
+
+const DAYS = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+
+const wmoIcon = (code) => WMO_ICONS[code] ?? '🌡️';
+const wmoDesc = (code) => WMO_DESCS[code] ?? 'Desconocido';
+const dayLabel = (dateStr) => DAYS[new Date(dateStr + 'T00:00:00').getDay()];
+
+// ─── APIs ─────────────────────────────────────────────────────────────────────
+// Cada API expone fetch(lat, lon) y devuelve datos normalizados:
+// { current: { temp, feelsLike, humidity, windSpeed, cloudCover, icon, description },
+//   forecast: [{ label, icon, max, min }] × 5 días }
+//
+// El array APIS es el único sitio donde se añaden nuevas fuentes.
+
+async function fetchOpenMeteo(lat, lon) {
+  const params = new URLSearchParams({
+    latitude: lat,
+    longitude: lon,
+    current:  'temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,wind_speed_10m,cloud_cover',
+    daily:    'weather_code,temperature_2m_max,temperature_2m_min',
+    timezone: 'Europe/Madrid',
+    forecast_days: 7,
+  });
+  const res = await fetch(`https://api.open-meteo.com/v1/forecast?${params}`);
+  if (!res.ok) throw new Error(`Open-Meteo HTTP ${res.status}`);
+  const data = await res.json();
+
+  return {
+    current: {
+      temp:        Math.round(data.current.temperature_2m),
+      feelsLike:   Math.round(data.current.apparent_temperature),
+      humidity:    data.current.relative_humidity_2m,
+      windSpeed:   Math.round(data.current.wind_speed_10m),
+      cloudCover:  data.current.cloud_cover,
+      icon:        wmoIcon(data.current.weather_code),
+      description: wmoDesc(data.current.weather_code),
+    },
+    forecast: data.daily.time.map((date, i) => ({
+      label: dayLabel(date),
+      icon:  wmoIcon(data.daily.weather_code[i]),
+      max:   Math.round(data.daily.temperature_2m_max[i]),
+      min:   Math.round(data.daily.temperature_2m_min[i]),
+    })),
+  };
+}
+
+// async function fetchOpenWeatherMap(lat, lon) { ... }  ← siguiente API aquí
+
+const APIS = [
+  { id: 'open-meteo', name: 'Open-Meteo', fetch: fetchOpenMeteo },
+  // { id: 'openweathermap', name: 'OpenWeatherMap', fetch: fetchOpenWeatherMap },
+];
+
+// ─── Render ───────────────────────────────────────────────────────────────────
+
+function renderCurrent({ temp, feelsLike, humidity, windSpeed, cloudCover, icon, description }) {
+  return `
+    <div class="wc-current">
+      <div class="wc-main">
+        <span class="wc-icon">${icon}</span>
+        <span class="wc-temp">${temp}°C</span>
+        <span class="wc-desc">${description}</span>
+      </div>
+      <div class="wc-details">
+        <div class="wc-detail"><span class="wc-detail-label">Viento</span><span class="wc-detail-value">💨 ${windSpeed} km/h</span></div>
+        <div class="wc-detail"><span class="wc-detail-label">Humedad</span><span class="wc-detail-value">💧 ${humidity}%</span></div>
+        <div class="wc-detail"><span class="wc-detail-label">Nubosidad</span><span class="wc-detail-value">☁️ ${cloudCover}%</span></div>
+        <div class="wc-detail"><span class="wc-detail-label">Sensación</span><span class="wc-detail-value">🌡️ ${feelsLike}°C</span></div>
+      </div>
+    </div>`;
+}
+
+function renderForecast(forecast) {
+  return `
+    <div class="wc-forecast">
+      ${forecast.map(day => `
+        <div class="wc-forecast-day">
+          <span class="wc-forecast-label">${day.label}</span>
+          <span class="wc-forecast-icon">${day.icon}</span>
+          <span class="wc-forecast-max">${day.max}°</span>
+          <span class="wc-forecast-min">${day.min}°</span>
+        </div>`).join('')}
+    </div>`;
+}
+
+function renderApiCard(api, result) {
+  const card = document.createElement('article');
+  card.className = 'api-card';
+  card.dataset.api = api.id;
+
+  if (result.status === 'fulfilled') {
+    const { current, forecast } = result.value;
+    card.innerHTML = `
+      <h3 class="api-card-title">${api.name}</h3>
+      ${renderCurrent(current)}
+      <p class="wc-forecast-title">Previsión 7 días</p>
+      ${renderForecast(forecast)}`;
+  } else {
+    card.innerHTML = `
+      <h3 class="api-card-title">${api.name}</h3>
+      <p class="api-error">No se pudo cargar esta fuente de datos.</p>`;
+    card.classList.add('api-card--error');
+  }
+  return card;
+}
+
+function renderCity(location, results) {
+  const section = document.createElement('section');
+  section.className = 'city-block';
+  section.id = location.id;
+
+  const grid = document.createElement('div');
+  grid.className = 'api-grid';
+  APIS.forEach((api, i) => grid.appendChild(renderApiCard(api, results[i])));
+
+  section.appendChild(grid);
+  return section;
+}
+
+// ─── Init ─────────────────────────────────────────────────────────────────────
+
+async function init() {
+  const app = document.getElementById('weather-app');
+
+  const tabsNav     = document.createElement('div');
+  const tabsContent = document.createElement('div');
+  tabsNav.className     = 'tabs-nav';
+  tabsContent.className = 'tabs-content';
+  app.append(tabsNav, tabsContent);
+
+  // Crear pestañas y placeholders para todas las ciudades antes de cargar datos
+  locations.forEach((location, i) => {
+    const btn = document.createElement('button');
+    btn.className    = 'tab-btn' + (i === 0 ? ' tab-btn--active' : '');
+    btn.textContent  = location.name;
+    btn.dataset.target = location.id;
+    tabsNav.appendChild(btn);
+
+    const placeholder = document.createElement('section');
+    placeholder.className = 'city-block' + (i === 0 ? ' city-block--active' : '');
+    placeholder.id        = location.id;
+    placeholder.innerHTML = `<p class="city-loading">Cargando datos meteorológicos…</p>`;
+    tabsContent.appendChild(placeholder);
+  });
+
+  // Cambio de pestaña
+  tabsNav.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    tabsNav.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('tab-btn--active'));
+    btn.classList.add('tab-btn--active');
+    tabsContent.querySelectorAll('.city-block').forEach(s => {
+      s.classList.toggle('city-block--active', s.id === btn.dataset.target);
+    });
+  });
+
+  // Cargar datos de cada ciudad y reemplazar su placeholder
+  for (const location of locations) {
+    // Promise.allSettled: todas las APIs se llaman en paralelo.
+    // A diferencia de Promise.all, si una falla las demás siguen mostrándose.
+    const results = await Promise.allSettled(
+      APIS.map(api => api.fetch(location.lat, location.lon))
+    );
+    const current = document.getElementById(location.id);
+    const city    = renderCity(location, results);
+    city.className = current.className;
+    tabsContent.replaceChild(city, current);
+  }
+}
+
+init();
